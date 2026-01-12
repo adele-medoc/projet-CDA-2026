@@ -1,0 +1,1 @@
+Ce dépôt regroupe plusieurs exemples de projets réalisés dans le cadre de ma formation en CDA. Il contient des exercices et mini-projets développés en différents langages : JavaScript, Python, java. Chaque dossier correspond à un langage et illustre l’apprentissage progressif de concepts fondamentaux en programmation, ainsi que la mise en pratique de notions abordées en cours.
