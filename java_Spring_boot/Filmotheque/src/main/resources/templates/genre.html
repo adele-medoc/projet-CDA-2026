@@ -1,0 +1,54 @@
+<!doctype html>
+
+<html lang="en" layout:decorate="~{layouts/layoutPrincipal}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<body>
+
+<!-- main : c'est le contenu principal de la page -->
+<!-- avec layout:fragment="contenu", je vais remplacer le main de mon layout par celui de ma page -->
+<main layout:fragment="contenu">
+
+<h2 th:text="#{genre.titre}"></h2>
+<form method="post" th:action="@{/genres}" th:object="${genre}">
+<!--    <label for="saisirNewGenre">Genre </label>-->
+    <input class="input" type="text" th:field="*{titre}" th:placeholder="#{table.genre}" id="saisirNewGenre">
+    <input class="button" type="submit" th:value="#{bouton.valider}">
+</form>
+<!-- balise de base : table -->
+<table>
+    <!--entete de la table (première ligne) : thead-->
+    <thead>
+    <!--ligne :tr (table row)-->
+    <tr>
+        <!-- th (table header) : un colonne de titre de ma table -->
+        <th>ID</th>
+        <th th:text="#{table.genre}"></th>
+        <th th:text="#{table.action}"></th>
+    </tr>
+    </thead>
+    <!--donnees de la table : tbody-->
+    <tbody>
+    <!-- je vais générer une ligne  <tr> par film stocké dans mon application
+        pour cela, on va utilser l'attribut : th:each
+        qui va itérer sur la liste contenue dans mon attribut de model : films
+
+        th:each="film : ${films}"
+        c'est l'équivalent de la boucle FOR-EACH de java : for (Film film : films){}
+        => ${films} correspond à l'attribut de modèle qui contient la liste
+        film correspond à l'élément de l'itération courante
+      -->
+    <tr th:each="genre : ${genres}">
+        <!-- td (table data) : une donnée de cellule d'un ligne de ma table -->
+        <td th:text="${genre.id}"></td>
+        <td th:text="${genre.titre}"></td>
+        <td>
+            <form method="post" th:action="@{/genres/supprimer}">
+                <button class="button" name="idGenreSupprimer"  th:field="*{genre.id}" th:value="${genre.id}">&#10007</button>
+            </form>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+</main>
+</body>
+</html>

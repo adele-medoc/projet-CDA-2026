@@ -1,0 +1,56 @@
+<!doctype html>
+<!-- Je veux utiliser le layout défini dans le fichier layoutPrincipal -->
+<html lang="en" layout:decorate="~{layouts/layoutPrincipal}" xmlns:layout="http://www.w3.org/1999/xhtml">
+    <body>
+
+        <main layout:fragment="contenu">
+            <h2>Nouveau Film </h2>
+
+            <form th:action="@{/films/nouveau}" method="post" th:object="${film}">
+                <fieldset>
+                    <label for="genre" th:text="#{table.genre}"></label>
+                    <select class="input" id="genre" th:field="*{genre}">
+                        <option th:each="genre : ${genres}" th:text="${genre.titre}" th:value="${genre.id}"></option>
+                    </select> <br>
+
+                    <label for="Annee" th:text="#{table.annee}"></label>
+                    <input class="input" type="number" id="Annee" th:field="*{annee}">
+                    <span class="erreur" th:errors="*{annee}"></span> <br>
+
+                    <label for="titre" th:text="#{table.titre}"></label>
+                    <input class="input" type="text" id="titre" th:field="*{titre}">
+                    <span class="erreur" th:errors="*{titre}"></span>  <br>
+
+                    <label for="realisateur" th:text="#{table.realisateur}"></label>
+                    <select class="input" id="realisateur" th:field="*{realisateur}">
+                        <option th:each="realisateur : ${participants}" th:text="${realisateur.getPrenom()+' '+realisateur.getNom()}" th:value="${realisateur.id}"></option>
+                    </select> <br>
+
+                    <label for="duree" th:text="#{table.duree}"></label>
+                    <input class="input" type="number" id="duree" th:field="*{duree}">
+                    <span class="erreur" th:errors="*{duree}"></span>
+
+                    <br>
+
+                    <label for="acteur" th:text="#{table.acteur}"></label>
+                    <select id="acteur" th:field="*{acteurs}" multiple>
+<!--                        <option th:each="acteur : ${participants}" th:text="${acteur.prenom + ' ' + acteur.nom}"  th:value="${acteur.id}"></option>-->
+                        <option th:each="realisateur : ${participants}" th:text="${realisateur.getPrenom()+' '+realisateur.getNom()}" th:value="${realisateur.id}"></option>
+                    </select>
+
+                    <br>
+
+                    <label for="synopsys" th:text="#{table.synopsis}"></label>
+                    <textarea class="input textarea" id="synopsys" th:field="*{synopsis}"></textarea>
+                    <span class="erreur" th:errors="*{synopsis}"></span>
+
+                    <br>
+
+                    <input class="button" type="submit" th:value="#{bouton.valider}">
+                </fieldset>
+            </form>
+
+        </main>
+
+    </body>
+</html>

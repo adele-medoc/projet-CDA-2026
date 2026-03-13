@@ -1,0 +1,55 @@
+<!doctype html>
+
+<html lang="en" layout:decorate="~{layouts/layoutPrincipal}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<body>
+
+<!-- main : c'est le contenu principal de la page -->
+<!-- avec layout:fragment="contenu", je vais remplacer le main de mon layout par celui de ma page -->
+    <main layout:fragment="contenu">
+        <h2 th:text="#{membres.titre}"></h2>
+
+        <form th:action="@{/participants/membres/ajouter}" method="POST" th:object="${membre}">
+            <input class="input" type="text" th:placeholder="#{participants.prenom}" th:field="*{prenom}" id="prenom"> <br>
+            <input class="input" type="text" th:placeholder="#{participants.nom}" th:field="*{nom}" id="nom"> <br>
+            <input class="input" type="text" th:placeholder="#{membres.pseudo}" th:field="*{pseudo}" id="pseudo"> <br>
+            <input class="input" type="password" th:placeholder="#{membres.mdp}" th:field="*{password}" id="mdp"> <br>
+            <label for="admin" th:text="#{membres.admin}"></label>
+            <input type="checkbox" name="admin" id="admin" th:field="*{admin}"> <br>
+            <input class="button" type="submit" th:value="#{bouton.valider}">
+        </form>
+
+        <table>
+
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th th:text="#{participants.nom}"></th>
+                <th th:text="#{membres.pseudo}"></th>
+                <th th:text="#{membres.mdp}"></th>
+                <th th:text="#{membres.admin}"></th>
+                <th th:text="#{table.action}"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="membre : ${membres}">
+                <td th:text="${membre.id}"></td>
+                <td th:text="${membre.prenom +' '+ membre.nom}"></td>
+                <td th:text="${membre.pseudo}"></td>
+                <td th:text="${membre.password}"></td>
+                <td>
+                    <h5 th:if="${membre.admin == true}">&#10003;</h5>
+                </td>
+                <td>
+                    <form method="post" th:action="@{/participants/membres/supprimer}">
+                        <button class="button" name="id"  th:field="*{membre.id}" th:value="${membre.id}">&#10007</button>
+                    </form>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

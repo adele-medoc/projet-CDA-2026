@@ -1,0 +1,52 @@
+<!doctype html>
+<!-- Je veux utiliser le layout défini dans le fichier layoutPrincipal -->
+<html lang="en" layout:decorate="~{layouts/layoutPrincipal}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<body>
+
+<!-- main : c'est le contenu principal de la page -->
+<!-- avec layout:fragment="contenu", je vais remplacer le main de mon layout par celui de ma page -->
+<main layout:fragment="contenu">
+
+    <a class="lien" href="/films" th:text="#{film.retour}"></a>
+    <!-- j'utilise les || pour mélanger du texte ("Détail du film :") et une variable ${film.titre} -->
+    <h2 th:text="|Détail du film : ${film.titre}|"></h2>
+
+    <label th:text="#{table.genre}"></label>
+    <span th:text="${film.genre.titre}"></span><br>
+    <!--    <select th:if="${film.id == null}" th:each="genre : ${genres}" >-->
+    <!--        <option th:text="${genre.titre}" ></option>-->
+    <!--    </select>-->
+
+    <label th:text="#{table.annee}" ></label>
+    <span th:text="${film.annee}"></span><br>
+    <label th:text="#{table.titre}"></label>
+    <span th:text="${film.titre}"></span><br>
+    <label th:text="#{table.realisateur}"></label>
+    <span th:text="${film.realisateur}"></span><br>
+    <label th:text="#{table.duree}" ></label>
+    <span th:text="${film.duree}"></span><br>
+    <label th:text="#{table.acteur}"></label>
+    <!--je veux afficher une liste (<ul>) avec un élément (<li>) par acteur-->
+    <ul class="inline-display">
+        <!-- th:each permet d'afficher un élément (<li>) par acteur  -->
+        <li th:each="acteur : ${film.acteurs}">
+            <span th:text="${acteur}"></span>
+        </li>
+    </ul><br>
+    <label th:text="#{table.synopsis}"> </label>
+    <span th:text="${film.synopsis}"></span><br>
+    
+
+    <label th:if="${film.avis.size()>0}" th:text="#{film.avis}"> </label>
+    <ul class="inline-display">
+        <li th:each="avis : ${film.avis}">
+            <span th:text="${avis.note+'&#9733; '+avis.commentaire+ ' ('+avis.getMembre().pseudo+')'}"></span>
+        </li>
+    </ul>
+    <form th:action="|/films/${film.id}/avis|" method="get">
+        <input type="submit"  class="button" th:value="#{table.avis}">
+    </form>
+</main>
+
+</body>
+</html>

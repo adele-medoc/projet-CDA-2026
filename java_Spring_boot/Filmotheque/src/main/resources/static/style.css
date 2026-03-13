@@ -1,0 +1,263 @@
+/*
+selecteur multiple sur la balise body :
+pour que mon header s'affiche mieux :
+- je veux enlever les marges (marges internes : padding, marges externes : margin)
+- je vais mettre l'affichage en display : flex (dans le sens : colonnes)
+*/
+body{
+    margin : 0;
+    padding: 0;
+    display: flex;
+    font-family: Arial,sans-serif;
+    flex-direction: column;
+    /* je veux que mon body fasse au moins la hauteur de la page */
+    min-height : 100vh;
+}
+.erreur{
+    color: red;
+}
+/*
+selecteur sur la balise header :
+va appliquer des règles de style sur toutes mes balises header
+*/
+header{
+
+    padding: 5px 20px;
+    background-color: rgb(255 56 86 / 77%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h2{
+    margin: 4px;
+
+}
+
+header a{
+    padding: 5px;
+    text-decoration: none;
+    margin-left: 10px;
+    color : black;
+    border-radius: 9px;
+    transition: all 0.5s ease;
+}
+
+header a:hover{
+    padding: 5px;
+    background-color: rgb(255 56 86);
+    border-radius: 9px;
+    transition: all 0.5s ease;
+}
+
+footer{
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #dddddd;
+    padding: 20px;
+}
+
+main {
+    flex-grow: 100;
+    padding: 20px;
+}
+
+main.centrer-contenu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: separate; /* important pour radius */
+    border-spacing: 0;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    margin: 20px 0;
+}
+
+/* Header */
+table thead {
+    background-color: crimson;
+    color: white;
+}
+
+table thead th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+/* Cellules */
+table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Ligne hover */
+table tbody tr:hover {
+    background-color: rgba(255, 56, 86, 0.08);
+    transition: 0.3s;
+}
+
+
+/* Liens */
+.lien {
+    text-decoration: none;
+    color: rgba(255, 56, 86, 0.7);
+    font-weight: 500;
+    transition: 0.3s;
+    margin-left: 15px;
+}
+
+.lien:hover {
+    color: rgb(255, 56, 86);
+}
+/****************************************************
+ ******************* INPUT *********************
+*****************************************************/
+
+/* From Uiverse.io by reglobby */
+.input {
+    border: 2px solid transparent;
+    width: 9em;
+    height: 2.5em;
+    padding-left: 0.8em;
+    outline: none;
+    overflow: hidden;
+    background-color: #F3F3F3;
+    border-radius: 10px;
+    transition: all 0.5s;
+    margin: 10px 5px 15px 5px;
+}
+
+.input:hover,
+.input:focus {
+    border: 2px solid  rgb(255 56 86);
+    box-shadow: 0px 0px 0px 7px rgb(255, 56, 86, 20%);
+    background-color: white;
+}
+select,
+select::picker(select) {
+    appearance: base-select;
+}
+
+select::picker-icon {
+    content:'\2665';
+}
+
+select::picker(select) {
+    appearance: base-select;
+    padding: 0.5rem;
+    border: 2px solid rgb(255 56 86);
+    border-radius: 10px;
+    background-color: white;
+}
+
+#acteur {
+    border: 2px solid transparent;
+    width: 15em;
+    min-height: 6em; /* plus grand pour multi */
+    padding: 0.5em 0.8em;
+    outline: none;
+    background-color: #F3F3F3;
+    border-radius: 7px;
+    transition: all 0.5s;
+    margin: 5px;
+    appearance: none; /* enlève style natif */
+}
+
+#acteur:hover,
+#acteur:focus {
+    border: 2px solid rgb(255 56 86);
+    box-shadow: 0px 0px 0px 7px rgb(255, 56, 86, 20%);
+    background-color: white;
+}
+
+#acteur option {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#acteur option:checked {
+    background-color: rgb(255 56 86);
+    color: white;
+}
+
+#acteur::-webkit-scrollbar {
+    width: 8px;
+}
+
+#acteur::-webkit-scrollbar-track {
+    background: #F3F3F3;
+    border-radius: 10px;
+}
+
+#acteur::-webkit-scrollbar-thumb {
+    background-color: rgb(255 56 86);
+    border-radius: 10px;
+}
+
+#acteur::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(220 40 70);
+}
+
+.textarea{
+    width: 25em;
+    height: 15em;
+}
+
+/****************************************************
+ ******************* FORMULAIRES *********************
+*****************************************************/
+label{
+    width: 110px;
+    margin-bottom: 5px;
+    display: inline-block;
+    font-weight: bold;;
+}
+
+
+/****************************************************
+ ******************* CLASSES "utilitaires" *********************
+*****************************************************/
+.inline-display{
+    display: inline-block;
+    padding-left: 5px;
+}
+/****************************************************
+ ******************* BUTTON *********************
+*****************************************************/
+.button {
+    padding: 10px 10px;
+    margin: 5px 0px 10px 15px;
+    border-radius: 10px;
+    border: 0;
+    background-color: rgb(255, 56, 86);
+    letter-spacing: 1.5px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    box-shadow: rgb(201, 46, 70) 0px 10px 0px 0px;
+    color: hsl(0, 0%, 100%);
+    cursor: pointer;
+}
+
+.button:hover {
+    box-shadow: rgb(201, 46, 70) 0px 7px 0px 0px;
+}
+
+.button:active {
+    background-color: rgb(255, 56, 86);
+    /*50, 168, 80*/
+    box-shadow: rgb(201, 46, 70) 0px 0px 0px 0px;
+    transform: translateY(5px);
+    transition: 200ms;
+}
+
+.buttonAvis{margin-left: 120px}

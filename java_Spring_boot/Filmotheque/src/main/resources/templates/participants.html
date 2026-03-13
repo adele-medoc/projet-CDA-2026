@@ -1,0 +1,54 @@
+<!doctype html>
+<!-- Je veux utiliser le layout défini dans le fichier layoutPrincipal -->
+<html lang="en" layout:decorate="~{layouts/layoutPrincipal}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<body>
+
+<!-- main : c'est le contenu principal de la page -->
+<!-- avec layout:fragment="contenu", je vais remplacer le main de mon layout par celui de ma page -->
+<main layout:fragment="contenu">
+
+  <h2 th:text="#{participants.titre}"></h2>
+  <form method="post" th:action="@{/participants}" th:object="${participant}">
+    <!--    <label for="prenom">Prenom </label>-->
+    <input th:placeholder="#{participants.prenom}" class="input" type="text" th:field="*{prenom}" id="prenom">
+<!--    <label for="nom">Nom </label>-->
+    <input th:placeholder="#{participants.nom}" class="input" type="text" th:field="*{nom}" id="nom">
+
+    <input class="button" type="submit" th:value="#{bouton.valider}">
+  </form>
+  <!-- balise de base : table -->
+  <table>
+    <!--entete de la table (première ligne) : thead-->
+    <thead>
+    <!--ligne :tr (table row)-->
+    <tr>
+      <!-- th (table header) : un colonne de titre de ma table -->
+      <th>ID</th>
+      <th th:text="#{table.participants}" >Participant</th>
+      <th th:text="#{table.action}" >Action</th>
+    </tr>
+    </thead>
+    <!--donnees de la table : tbody-->
+    <tbody>
+    <!-- je vais générer une ligne  <tr> par film stocké dans mon application
+        pour cela, on va utilser l'attribut : th:each
+        qui va itérer sur la liste contenue dans mon attribut de model : films
+
+        th:each="film : ${films}"
+        c'est l'équivalent de la boucle FOR-EACH de java : for (Film film : films){}
+        => ${films} correspond à l'attribut de modèle qui contient la liste
+        film correspond à l'élément de l'itération courante
+      -->
+    <form th:action="@{/participants/supprimer}" method="post">
+    <tr th:each="participant : ${participants}">
+      <!-- td (table data) : une donnée de cellule d'un ligne de ma table -->
+      <td th:text="${participant.id}"></td>
+      <td th:text="${participant.prenom +' '+ participant.nom}"></td>
+      <td> <button class="button" name="idGenreSupprimer" th:field="${participant.id}" th:value="${participant.id}">&#10007</button> </td>
+    </tr>
+    </form>
+    </tbody>
+  </table>
+</main>
+</body>
+</html>
